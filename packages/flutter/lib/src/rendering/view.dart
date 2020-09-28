@@ -244,8 +244,16 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
 
   void _updateSystemChrome() {
     final Rect bounds = paintBounds;
-    final Offset top = Offset(bounds.center.dx, _window.padding.top / _window.devicePixelRatio);
-    final Offset bottom = Offset(bounds.center.dx, bounds.center.dy - _window.padding.bottom / _window.devicePixelRatio);
+    // center of the status bar
+    final Offset top = Offset(
+      bounds.center.dx,
+      _window.padding.top / 2.0,
+    );
+    // center of the navigation bar
+    final Offset bottom = Offset(
+      bounds.center.dx,
+      bounds.bottom - 1.0 - _window.padding.bottom / 2.0,
+    );
     final SystemUiOverlayStyle upperOverlayStyle = layer.find<SystemUiOverlayStyle>(top);
     // Only android has a customizable system navigation bar.
     SystemUiOverlayStyle lowerOverlayStyle;
